@@ -1,0 +1,32 @@
+name: Build Action
+
+on:
+  push:
+    branches:
+      - ironman
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: استنساخ المستودع
+        uses: actions/checkout@v3
+        with:
+          repository: mohamedmahdydeveloper/react_starter_project
+          path: react_starter_project
+
+      - name: إعداد Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: إعطاء صلاحيات للتنفيذ
+        run: chmod +x react_starter_project/npm_install
+
+      - name: تثبيت واعتماد الحزم
+        run: |
+          cd react_starter_project
+          ./npm_install
+
+      - name: Run foreground wait
+        run: sleep 21600
